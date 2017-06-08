@@ -1,0 +1,76 @@
+<project>
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.exercise9</groupId>
+		<artifactId>Employee-Spring</artifactId>
+		<version>1.0.1</version>		
+	</parent>	
+
+	<groupId>com.exercise9.core</groupId>
+	<artifactId>core</artifactId>
+	<version>1.0.1</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>model</module>
+		<module>dao</module>
+		<module>service</module>
+	</modules>		
+
+	<properties>
+		<commons-validator-version>1.6</commons-validator-version>
+		<parent-version>1.0.1</parent-version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.exercise9.util</groupId>
+				<artifactId>util</artifactId>
+				<version>${parent-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.exercise9.core.model</groupId>
+				<artifactId>model</artifactId>
+				<version>${parent-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.exercise9.core.dao</groupId>
+				<artifactId>dao</artifactId>		
+				<version>${parent-version}</version>	
+			</dependency>
+
+			<dependency>
+				<groupId>com.exercise9.core.service</groupId>
+				<artifactId>service</artifactId>	
+				<version>${parent-version}</version>		
+			</dependency>		
+
+			<dependency>
+				<groupId>commons-validator</groupId>
+				<artifactId>commons-validator</artifactId>
+				<version>${commons-validator-version}</version>
+			</dependency>		
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</pluginManagement>		
+	</build>
+</project>
