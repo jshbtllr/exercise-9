@@ -9,7 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 
-public class GenericDAO implements GenericDAOInterface {
+public class GenericDAO <T> implements GenericDAOInterface <T> {
 
 	private SessionFactory sessionFactory;
 
@@ -17,8 +17,7 @@ public class GenericDAO implements GenericDAOInterface {
 		this.sessionFactory = sessionFactory;
 	}
 
-	public Type add(Type added) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	public T add(T added) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 
@@ -38,8 +37,7 @@ public class GenericDAO implements GenericDAOInterface {
 		return added;
 	}
 
-	public Type update(Type updated) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	public T update(T updated) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 
@@ -57,8 +55,7 @@ public class GenericDAO implements GenericDAOInterface {
 		return updated;
 	}	
 
-	public static Type delete(Type deleted) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	public T delete(T deleted) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 
@@ -78,15 +75,14 @@ public class GenericDAO implements GenericDAOInterface {
 		return deleted;
 	}	
 
-	public Type get(Class<Type> entity, Long id) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	public T get(Class<T> entity, Long id) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
-		Type details = null;
+		T details = null;
 
 		try {
 			transaction = session.beginTransaction();
-			details = (Type) session.get(entity, id);
+			details = (T) session.get(entity, id);
 		} catch(HibernateException he) {
 			if(transaction != null) {
 				transaction.rollback();

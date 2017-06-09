@@ -12,9 +12,8 @@ import org.hibernate.SessionFactory;
 import java.util.List;
 
 
-public class RoleDAO extends GenericDAOImpl {
-	public List <Roles> showRoles(Integer sortRule, Integer orderRule) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+public class RoleDAO extends GenericDAOImpl <Roles> {
+	public List <Roles> showRoles(Integer sortRule, Boolean ascending) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		Query query = null;
@@ -25,19 +24,19 @@ public class RoleDAO extends GenericDAOImpl {
 			transaction = session.beginTransaction();
 
 			if(sortRule == 1) {
-				if(orderRule == 1) {
+				if(ascending == true) {
 					query = session.createQuery("FROM Roles ORDER BY id");
 				} else {
 					query = session.createQuery("FROM Roles ORDER BY id DESC");
 				}
 			} else if(sortRule == 2) {
-				if(orderRule == 1) {
+				if(ascending == true) {
 					query = session.createQuery("FROM Roles ORDER BY roleCode");
 				} else {
 					query = session.createQuery("FROM Roles ORDER BY roleCode DESC");
 				} 
 			} else if(sortRule == 3) {
-				if(orderRule == 1) {
+				if(ascending == true) {
 					query = session.createQuery("FROM Roles ORDER BY roleName");
 				} else {
 					query = session.createQuery("FROM Roles ORDER BY roleName desc");
@@ -57,7 +56,6 @@ public class RoleDAO extends GenericDAOImpl {
 	}		
 
 	public Boolean checkDuplicateRole(Roles role, Integer option) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		Boolean existing = false;

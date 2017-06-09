@@ -18,12 +18,12 @@ import java.text.ParseException;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class EmployeeService {
-	public static void createEmployee(Employee employee) {
-		EmployeeDAO.add(employee);
+public class EmployeeCrudServiceImpl implements CrudServiceInterface <Employee> {
+	public Employee create(Employee employee) {
+		return EmployeeDAO.add(employee);
 	}
 
-	public static List <Employee> listEmployees(Integer sortFunction, Integer orderFunction) {
+	public List <Employee> read(Integer sortFunction, Boolean ascending) {
 		List <Employee> list = EmployeeDAO.showEmployees(sortFunction, orderFunction);
 		Set <Roles> roles;
 		Set <ContactInfo> contacts;
@@ -32,7 +32,7 @@ public class EmployeeService {
 			if(sortFunction == 2) {
 				Collections.sort(list, new gwaComparator());
 
-				if(orderFunction == 2) {
+				if(ascending == false) {
 					Collections.sort(list, Collections.reverseOrder(new gwaComparator()));						
 				}
 			}
@@ -41,15 +41,14 @@ public class EmployeeService {
 		return list;
 	}	
 
-	public static void deleteEmployee(Long employeeId) {
+	public Employee delete(Long employeeId) {
 		Employee employee = new Employee();
 		employee = EmployeeDAO.get(Employee.class, employeeId);
-
-		EmployeeDAO.delete(employee);
+		return EmployeeDAO.delete(employee);
 	}
 
-	public static void updateEmployee(Employee employee) {
-		EmployeeDAO.update(employee);
+	public Employee update(Employee employee) {
+		return EmployeeDAO.update(employee);
 	}
 }
 

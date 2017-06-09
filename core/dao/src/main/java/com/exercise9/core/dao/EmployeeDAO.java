@@ -21,9 +21,8 @@ import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class EmployeeDAO extends GenericDAOImpl {
-	public List <Employee> showEmployees(Integer sort, Integer order) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+public class EmployeeDAO extends GenericDAOImpl <Employee> {
+	public List <Employee> showEmployees(Integer sort, Boolean ascending) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		Criteria criteria = null;
@@ -34,13 +33,13 @@ public class EmployeeDAO extends GenericDAOImpl {
 			criteria = session.createCriteria(Employee.class, "employee");
 
 			if(sort == 1) {
-				if(order == 1) {
+				if(ascending == true) {
 					criteria.addOrder(Order.asc("employee.name.lastName"));
 				} else {
 					criteria.addOrder(Order.desc("employee.name.lastName"));
 				}
 			} else if(sort == 3) {
-				if(order == 1) {
+				if(ascending == true) {
 					criteria.addOrder(Order.asc("hireDate"));
 				} else {
 					System.out.println("Sorts by hiredate desc");
@@ -51,13 +50,12 @@ public class EmployeeDAO extends GenericDAOImpl {
 			}
 
 			list = criteria.list();	
-			if(order != 0) {	
-				for ( Employee employee : list ) {
-					Hibernate.initialize(employee.getRole());
-					Hibernate.initialize(employee.getContactInfo());
-				}
+			//if(order != 0) {	
+			for ( Employee employee : list ) {
+				Hibernate.initialize(employee.getRole());
+				Hibernate.initialize(employee.getContactInfo());
+			//}
 			}	
-			System.out.println("Number of employees: " + list.size());	
 		} catch(HibernateException he) {
 			if (transaction != null) {
 				transaction.rollback();
@@ -70,7 +68,6 @@ public class EmployeeDAO extends GenericDAOImpl {
 	}	
 
 	public Employee getEmployeeCollection(Long employeeId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		Employee employee = null;
@@ -96,7 +93,6 @@ public class EmployeeDAO extends GenericDAOImpl {
 	}				
 
 	public Boolean employeeCheck(Long employeeId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		Query query = null;
@@ -119,11 +115,5 @@ public class EmployeeDAO extends GenericDAOImpl {
 		}
 		
 		return present;
-	}
-}
-
-class gwaComparator implements Comparator <Employee> {
-	public int compare(Employee a, Employee b) {
-		return a.getGradeWeightAverage() < b.getGradeWeightAverage() ? -1 : a.getGradeWeightAverage() == b.getGradeWeightAverage() ? 0 : 1;
 	}
 }

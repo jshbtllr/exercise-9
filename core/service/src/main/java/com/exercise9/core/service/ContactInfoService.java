@@ -8,7 +8,7 @@ import java.util.Iterator;
 import org.apache.commons.validator.routines.EmailValidator;
 
 public class ContactInfoService {
-	public static Integer addContactInfo(Long employeeId, ContactInfo addInfo) {
+	public Integer addContactInfo(Long employeeId, ContactInfo addInfo) {
 		Employee employee = null;
 		Set <ContactInfo> contacts;
 		Integer contactCount = null;
@@ -30,7 +30,7 @@ public class ContactInfoService {
 	}
 
 
-	public static Set <ContactInfo> addContactSet(Set <ContactInfo> contacts, Employee employee, ContactInfo addInfo) {	
+	public Set <ContactInfo> addContactSet(Set <ContactInfo> contacts, Employee employee, ContactInfo addInfo) {	
 		Boolean exist = false;
 
 		addInfo = checkInfo(addInfo);
@@ -55,7 +55,7 @@ public class ContactInfoService {
 		return contacts;
 	}
 
-	public static ContactInfo checkInfo(ContactInfo info) {
+	public ContactInfo checkInfo(ContactInfo info) {
 		if(info.getInfoType().equals("email")) {
 			if(!EmailValidator.getInstance().isValid(info.getInfoDetail())) {
 				info.setInfoType(" ");
@@ -73,7 +73,7 @@ public class ContactInfoService {
 		return info;		
 	}
 
-	public static Integer removeContactInfo(Long employeeId, ContactInfo deleteContact) {
+	public Integer removeContactInfo(Long employeeId, ContactInfo deleteContact) {
 		Employee employee;
 		Boolean exist = false;
 		Set <ContactInfo> contacts = null;
@@ -99,7 +99,7 @@ public class ContactInfoService {
 		return 1;
 	}
 
-	public static Integer updateContactInfo(Long employeeId, ContactInfo updateContact, String newInfoDetail) {
+	public Integer updateContactInfo(Long employeeId, ContactInfo updateContact, String newInfoDetail) {
 		Employee employee = null;
 		Boolean exist = false;
 		ContactInfo newInfo = new ContactInfo(updateContact.getInfoType(), newInfoDetail);

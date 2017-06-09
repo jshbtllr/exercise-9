@@ -50,6 +50,5 @@
 				</tr>
 			</thead>
 			<tbody>
-				<
-
+				<core:forEach var="" 
 

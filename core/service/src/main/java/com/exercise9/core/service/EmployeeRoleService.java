@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.Iterator;
 
 public class EmployeeRoleService {
-	public static Integer addRemoveEmployeeRoles(Integer option, Long employeeId, Long roleId) {			/*Option 1 add, Option 2 remove*/
+	public Integer addRemoveEmployeeRoles(Integer option, Long employeeId, Long roleId) {			/*Option 1 add, Option 2 remove*/
 		Employee employee = null;
 		Set <Roles> employeeRoles;
 		Integer roleCount = null;
@@ -33,7 +33,7 @@ public class EmployeeRoleService {
 		return 1;
 	}
 
-	public static Set <Roles> addRoleSet(Set <Roles> roles, Long roleId) {
+	public Set <Roles> addRoleSet(Set <Roles> roles, Long roleId) {
 		Roles newRole = new Roles(" ", " ");
 		Boolean exist = false;
 
@@ -59,7 +59,7 @@ public class EmployeeRoleService {
 		return roles;
 	}
 
-	public static Set <Roles> removeRoleSet(Set <Roles> roles, Long roleId) {
+	public Set <Roles> removeRoleSet(Set <Roles> roles, Long roleId) {
 		Roles deleteRole = new Roles(" ", " ");
 		Iterator <Roles> iterator = null;
 		Boolean exist = false;
