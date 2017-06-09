@@ -15,8 +15,11 @@ import com.exercise9.core.service.EmployeeCrudServiceImpl;
 
 public class EmployeeController extends SimpleFormController{
 	private EmployeeCrudServiceImpl employeeService;
+	private static final Integer sortByName = new Integer(1);
+	private static final Integer sortByGrade = new Integer(2);
+	private static final Integer sortByHire = new Integer(3);
 	private static final Integer sortById = new Integer(4);
-	private static final Boolean ascending = true;
+	private Boolean ascending = true;
 
 	public setEmployeeService(EmployeeCrudServiceImpl employeeService) {
 		this.employeeService = employeeService;
@@ -29,7 +32,9 @@ public class EmployeeController extends SimpleFormController{
 
 	protected ModelAndView showForm(HttpServletRequest request, HttpServletResponse response, BindException bindException) {
 		ModelAndView modelAndView = new ModelAndView("home");
-		List <Employee> employeeList = employeeService.read()
+		List <Employee> employeeList = employeeService.read(sortById, ascending);
+		modelAndView.addObject("employees",employeeList);
 
+		return modelAndView;
 	}
 }

@@ -19,12 +19,19 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class EmployeeCrudServiceImpl implements CrudServiceInterface <Employee> {
+
+	private EmployeeDAO employeeDao;
+
+	public EmployeeDAO setEmployeeDao(EmployeeDAO employeeDao) {
+		this.employeeDao = employeeDao;
+	}
+
 	public Employee create(Employee employee) {
-		return EmployeeDAO.add(employee);
+		return employeeDao.add(employee);
 	}
 
 	public List <Employee> read(Integer sortFunction, Boolean ascending) {
-		List <Employee> list = EmployeeDAO.showEmployees(sortFunction, orderFunction);
+		List <Employee> list = employeeDao.showEmployees(sortFunction, orderFunction);
 		Set <Roles> roles;
 		Set <ContactInfo> contacts;
 
@@ -43,12 +50,12 @@ public class EmployeeCrudServiceImpl implements CrudServiceInterface <Employee> 
 
 	public Employee delete(Long employeeId) {
 		Employee employee = new Employee();
-		employee = EmployeeDAO.get(Employee.class, employeeId);
-		return EmployeeDAO.delete(employee);
+		employee = employeeDao.get(Employee.class, employeeId);
+		return employeeDao.delete(employee);
 	}
 
 	public Employee update(Employee employee) {
-		return EmployeeDAO.update(employee);
+		return employeeDao.update(employee);
 	}
 }
 
