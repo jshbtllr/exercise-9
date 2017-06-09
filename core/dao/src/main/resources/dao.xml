@@ -13,4 +13,10 @@
 </beans>
 
 
-<!--https://www.mkyong.com/spring-security/spring-security-hibernate-xml-example/-->
+<!--https://www.mkyong.com/spring-security/spring-security-hibernate-xml-example/
+http://www.concretepage.com/spring-4/spring-4-mvc-hibernate-4-mysql-maven-crud-integration-using-annotation-and-xml-with-tomcat-8-and-spring-boot-example
+
+http://opensourceforgeeks.blogspot.in/2014/09/lifecycle-of-simpleformcontroller-of.html
+https://www.javainterviewpoint.com/spring-mvc-simpleformcontroller-example/ -- setCommand
+
+http://tutorials4u.net/spring-tutorial/spring_simple_form_controller.html-->
