@@ -22,98 +22,68 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class EmployeeDAO extends GenericDAOImpl <Employee> {
+	
+/*	SessionFactory sessionFactory;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}*/
+
 	public List <Employee> showEmployees(Integer sort, Boolean ascending) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
 		Criteria criteria = null;
 		List <Employee> list = null;
 		
-		try {
-			transaction = session.beginTransaction();
-			criteria = session.createCriteria(Employee.class, "employee");
-
-			if(sort == 1) {
-				if(ascending == true) {
-					criteria.addOrder(Order.asc("employee.name.lastName"));
-				} else {
-					criteria.addOrder(Order.desc("employee.name.lastName"));
-				}
-			} else if(sort == 3) {
-				if(ascending == true) {
-					criteria.addOrder(Order.asc("hireDate"));
-				} else {
-					System.out.println("Sorts by hiredate desc");
-					criteria.addOrder(Order.desc("hireDate"));
-				}
-			} else if(sort == 4) {
-				criteria.addOrder(Order.asc("id"));
+		criteria = sessionFactory.getCurrentSession().createCriteria(Employee.class, "employee");
+		if(sort == 1) {
+			if(ascending == true) {
+				criteria.addOrder(Order.asc("employee.name.lastName"));
+			} else {
+				criteria.addOrder(Order.desc("employee.name.lastName"));
 			}
-
-			list = criteria.list();	
-			//if(order != 0) {	
-			for ( Employee employee : list ) {
-				Hibernate.initialize(employee.getRole());
-				Hibernate.initialize(employee.getContactInfo());
-			//}
-			}	
-		} catch(HibernateException he) {
-			if (transaction != null) {
-				transaction.rollback();
+		} else if(sort == 3) {
+			if(ascending == true) {
+				criteria.addOrder(Order.asc("hireDate"));
+			} else {
+				System.out.println("Sorts by hiredate desc");
+				criteria.addOrder(Order.desc("hireDate"));
 			}
-		} finally {
-			session.close();
+		} else if(sort == 4) {
+			criteria.addOrder(Order.asc("id"));
 		}
 
+		list = criteria.list();	
+		//if(order != 0) {	
+		for ( Employee employee : list ) {
+			Hibernate.initialize(employee.getRole());
+			Hibernate.initialize(employee.getContactInfo());
+		//}
+		}	
+		
 		return list;				
 	}	
 
 	public Employee getEmployeeCollection(Long employeeId) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
 		Employee employee = null;
 		Criteria criteria = null;
 
-		try {
-			transaction = session.beginTransaction();
-			criteria = session.createCriteria(Employee.class);
-			criteria.add(Restrictions.eq("id", employeeId));
-			employee = (Employee) criteria.list().get(0);
-			Hibernate.initialize(employee.getRole());
-			Hibernate.initialize(employee.getContactInfo());
-		} catch(HibernateException he) {
-			if(transaction != null) {
-				transaction.rollback();
-			}
-			System.out.println("Error getting employee");
-			he.printStackTrace();
-		} finally {
-			session.close();
-		}
+		criteria = sessionFactory.getCurrentSession().createCriteria(Employee.class);
+		criteria.add(Restrictions.eq("id", employeeId));
+		employee = (Employee) criteria.list().get(0);
+		Hibernate.initialize(employee.getRole());
+		Hibernate.initialize(employee.getContactInfo());
+		
 		return employee;
 	}				
 
 	public Boolean employeeCheck(Long employeeId) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
 		Query query = null;
 		Boolean present = false;
 
-		try {
-			transaction = session.beginTransaction();
-			query = session.createQuery("SELECT id FROM Employee WHERE id = :employeeid");
-			query.setParameter("employeeid", employeeId);
+		query = sessionFactory.getCurrentSession().createQuery("SELECT id FROM Employee WHERE id = :employeeid");
+		query.setParameter("employeeid", employeeId);
 
-			present = !(query.list().isEmpty());
-		} catch(HibernateException he) {
-			if (transaction != null)  {
-				transaction.rollback();
-			}
-			System.out.println("Error occurred");
-			he.printStackTrace();
-		} finally {
-			session.close();
-		}
-		
+		present = !(query.list().isEmpty());
+	
 		return present;
 	}
 }

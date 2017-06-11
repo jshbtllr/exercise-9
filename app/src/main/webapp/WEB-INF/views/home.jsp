@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html>
@@ -53,9 +52,11 @@
 			<tbody>
 				<core:forEach var="employee" items="${employees}">
 				<tr>
+					<td align="center">${employee.id}</td>
 					<td align="center">${employee.name.title} ${employee.name.firstName} ${employee.name.middleName} ${employee.name.lastName} ${employee.name.suffix}</td>
 					<td align="center">${employee.address.streetNumber} ${employee.address.barangay} ${employee.address.city} ${employee.address.country} ${employee.address.zipcode}</td>
 					<td align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${employee.birthday}"/></td>
+					<td align="center">${employee.gradeWeightAverage}</td>
 					<core:choose>
 						<core:when test="${employee.employed}">
 							<td align="center">Yes</td>
@@ -71,7 +72,7 @@
 							<td align="center">No Contacts Available</td>
 						</core:when>
 						<core:otherwise>
-							<td align"center">
+							<td align="center">
 								<core:forEach var="contact" items="${employee.contactInfo}">
 									${contact.infoType}: ${contact.infoDetail} <br/>
 								</core:forEach>
@@ -83,9 +84,9 @@
 							<td align="center">No Roles Available</td>
 						</core:when>
 						<core:otherwise>
-							<td align"center">
+							<td align="center">
 								<core:forEach var="emprole" items="${employee.role}">
-									${emplrole.roleName}<br/>
+									${emprole.roleName}<br/>
 								</core:forEach>
 							</td>
 						</core:otherwise>

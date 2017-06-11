@@ -22,6 +22,7 @@
 	<properties>
 		<commons-validator-version>1.6</commons-validator-version>
 		<parent-version>1.0.1</parent-version>
+		<datasource-version>1.4</datasource-version>
 	</properties>
 
 	<dependencyManagement>
@@ -55,6 +56,26 @@
 				<artifactId>commons-validator</artifactId>
 				<version>${commons-validator-version}</version>
 			</dependency>		
+
+	<!-- LocalSessionFactoryBean DataSource -->
+			<dependency>
+			    <groupId>commons-dbcp</groupId>
+			    <artifactId>commons-dbcp</artifactId>
+			    <version>${datasource-version}</version>
+			</dependency>
+
+	<!-- Aspect Dependencies -->
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectj-version}</version>
+			</dependency>			
+
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>${cglib-version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

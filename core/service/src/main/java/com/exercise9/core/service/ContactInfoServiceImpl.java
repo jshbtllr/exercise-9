@@ -7,20 +7,27 @@ import java.util.Set;
 import java.util.Iterator;
 import org.apache.commons.validator.routines.EmailValidator;
 
-public class ContactInfoService {
+public class ContactInfoServiceImpl implements ContactInfoServiceInterface {
+
+	private EmployeeDAO employeeDao;
+
+	public void setEmployeeDao (EmployeeDAO employeeDao) {
+		this.employeeDao = employeeDao;
+	}
+
 	public Integer addContactInfo(Long employeeId, ContactInfo addInfo) {
 		Employee employee = null;
 		Set <ContactInfo> contacts;
 		Integer contactCount = null;
 
-		employee = EmployeeDAO.getEmployeeCollection(employeeId);
+		employee = employeeDao.getEmployeeCollection(employeeId);
 		contacts = employee.getContactInfo();	
 		contactCount = contacts.size();
 
 		contacts = addContactSet(contacts, employee, addInfo);
 
 		employee.setContactInfo(contacts);
-		EmployeeDAO.update(employee);
+		employeeDao.update(employee);
 		
 		if(contacts.size() == contactCount) {
 			return 0;
@@ -28,7 +35,6 @@ public class ContactInfoService {
 			return 1;
 		}		
 	}
-
 
 	public Set <ContactInfo> addContactSet(Set <ContactInfo> contacts, Employee employee, ContactInfo addInfo) {	
 		Boolean exist = false;
@@ -79,7 +85,7 @@ public class ContactInfoService {
 		Set <ContactInfo> contacts = null;
 		Iterator <ContactInfo> iterator = null;
 
-		employee = EmployeeDAO.getEmployeeCollection(employeeId);
+		employee = employeeDao.getEmployeeCollection(employeeId);
 		contacts = employee.getContactInfo();
 
 		iterator = contacts.iterator();
@@ -91,7 +97,7 @@ public class ContactInfoService {
 		}
 
 		employee.setContactInfo(contacts);
-		EmployeeDAO.update(employee);
+		employeeDao.update(employee);
 
 		if(!exist) {
 			return 0;
@@ -106,7 +112,7 @@ public class ContactInfoService {
 		Set <ContactInfo> contacts = null;
 		Iterator <ContactInfo> iterator = null;		
 
-		employee = EmployeeDAO.getEmployeeCollection(employeeId);
+		employee = employeeDao.getEmployeeCollection(employeeId);
 		contacts = employee.getContactInfo();
 		
 		for(ContactInfo list : contacts) {
@@ -121,7 +127,7 @@ public class ContactInfoService {
 		}
 
 		employee.setContactInfo(contacts);
-		EmployeeDAO.update(employee);	
+		employeeDao.update(employee);	
 
 		return 1;
 	}

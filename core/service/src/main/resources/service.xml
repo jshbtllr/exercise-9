@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
-	   					   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-    <bean id="empServiceBean" class="com.exercise9.core.service.EmployeeCrudServiceImpl">
-    	<property name="employeeDao" ref="empDao">
+    <bean id="employeeService" class="com.exercise9.core.service.EmployeeCrudServiceImpl">
+        <property name="employeeDao" ref="EmployeeDAO"/>
     </bean>
 
-    <bean id="empDao" class="com.exercise9.core.dao.EmployeeDAO">
+    <bean id="roleService" class="com.exercise9.core.service.RoleCrudServiceImpl">
+    	<property name="roleDao" ref="RoleDAO"/>
+    </bean>    
+
+    <bean id="contactInfoService" class="com.exercise9.core.service.ContactInfoServiceImpl">
+    	<property name="employeeDao" ref="EmployeeDAO"/>
+    </bean>
+
+    <bean id="employeeRoleService" class="com.exercise9.core.service.EmployeeRoleServiceImpl">
+    	<property name="employeeDao" ref="EmployeeDAO"/>
+    	<property name="roleDao" ref="RoleDAO"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:advice id="transaction" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="read" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="servicePointCut" expression="execution(* com.exercise9.core.service.*.*(..))"/>
+        <aop:advisor advice-ref="transaction" pointcut-ref="servicePointCut"/>
+    </aop:config>
+
 </beans>

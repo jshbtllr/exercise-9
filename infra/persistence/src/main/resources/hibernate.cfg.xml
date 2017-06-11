@@ -9,22 +9,6 @@
 			${hibernate-dialect}
 		</property>
 
-		<property name="hibernate.connection.driver-class">
-			${hibernate-driver}
-		</property>
-
-		<property name="hibernate.connection.url">
-			${hibernate-url}
-		</property>
-
-		<property name="hibernate.connection.username">
-			${hibernate-username}
-		</property>
-
-		<property name="hibernate.connection.password">
-			${hibernate-password}
-		</property>
-
 		<property name="hibernate.show_sql">
 			${hibernate-show-sql}
 		</property>

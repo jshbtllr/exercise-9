@@ -7,8 +7,6 @@ import com.exercise9.core.model.Name;
 import com.exercise9.util.InputUtil;
 import com.exercise9.core.dao.RoleDAO;
 import com.exercise9.core.dao.EmployeeDAO;
-import com.exercise9.core.service.EmployeeRoleService;
-import com.exercise9.core.service.ContactInfoService;
 import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
@@ -22,7 +20,7 @@ public class EmployeeCrudServiceImpl implements CrudServiceInterface <Employee> 
 
 	private EmployeeDAO employeeDao;
 
-	public EmployeeDAO setEmployeeDao(EmployeeDAO employeeDao) {
+	public void setEmployeeDao(EmployeeDAO employeeDao) {
 		this.employeeDao = employeeDao;
 	}
 
@@ -31,9 +29,7 @@ public class EmployeeCrudServiceImpl implements CrudServiceInterface <Employee> 
 	}
 
 	public List <Employee> read(Integer sortFunction, Boolean ascending) {
-		List <Employee> list = employeeDao.showEmployees(sortFunction, orderFunction);
-		Set <Roles> roles;
-		Set <ContactInfo> contacts;
+		List <Employee> list = employeeDao.showEmployees(sortFunction, ascending);
 
 		if(!list.isEmpty()) {
 			if(sortFunction == 2) {

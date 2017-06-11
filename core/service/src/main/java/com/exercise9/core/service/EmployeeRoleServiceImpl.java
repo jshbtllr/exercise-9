@@ -4,17 +4,28 @@ import com.exercise9.core.model.Employee;
 import com.exercise9.util.InputUtil;
 import com.exercise9.core.dao.RoleDAO;
 import com.exercise9.core.dao.EmployeeDAO;
-import com.exercise9.core.service.RoleService;
 import java.util.Set;
 import java.util.Iterator;
 
-public class EmployeeRoleService {
+public class EmployeeRoleServiceImpl implements EmployeeRoleServiceInterface {
+
+	private EmployeeDAO employeeDao;
+	private RoleDAO roleDao;
+
+	public void setEmployeeDao(EmployeeDAO employeeDao) {
+		this.employeeDao = employeeDao;
+	}
+
+	public void setRoleDao(RoleDAO roleDao) {
+		this.roleDao = roleDao;
+	}
+
 	public Integer addRemoveEmployeeRoles(Integer option, Long employeeId, Long roleId) {			/*Option 1 add, Option 2 remove*/
 		Employee employee = null;
 		Set <Roles> employeeRoles;
 		Integer roleCount = null;
 
-		employee = EmployeeDAO.getEmployeeCollection(employeeId);
+		employee = employeeDao.getEmployeeCollection(employeeId);
 		employeeRoles = employee.getRole();	
 		roleCount = employeeRoles.size();
 
@@ -28,7 +39,7 @@ public class EmployeeRoleService {
 		}
 
 		employee.setRole(employeeRoles);
-		EmployeeDAO.update(employee);
+		employeeDao.update(employee);
 
 		return 1;
 	}
@@ -39,10 +50,10 @@ public class EmployeeRoleService {
 
 		newRole.setId(roleId);
 
-		if(!(RoleDAO.checkDuplicateRole(newRole, 4))) {
+		if(!(roleDao.checkDuplicateRole(newRole, 4))) {
 			return roles;
 		}
-		newRole = RoleDAO.get(Roles.class, roleId);
+		newRole = roleDao.get(Roles.class, roleId);
 		
 		if(roles.isEmpty()) {
 			roles.add(newRole);
@@ -64,7 +75,7 @@ public class EmployeeRoleService {
 		Iterator <Roles> iterator = null;
 		Boolean exist = false;
 
-		deleteRole = RoleDAO.get(Roles.class, roleId);
+		deleteRole = roleDao.get(Roles.class, roleId);
 		
 		iterator = roles.iterator();
 		while(iterator.hasNext()) {

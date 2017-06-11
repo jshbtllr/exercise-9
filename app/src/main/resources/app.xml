@@ -5,8 +5,6 @@
 	   					   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <bean name="/employee" class="com.exercise9.app.EmployeeController">
-    	<property name="employeeService" ref="empServiceBean">
+    	<property name="employeeService" ref="employeeService"/>
     </bean>
-
-    <bean id="empServiceBean" class="com.exercise9.core.service.EmployeeCrudServiceImpl">
 </beans>

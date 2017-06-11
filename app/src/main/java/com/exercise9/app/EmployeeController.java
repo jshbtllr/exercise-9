@@ -21,7 +21,7 @@ public class EmployeeController extends SimpleFormController{
 	private static final Integer sortById = new Integer(4);
 	private Boolean ascending = true;
 
-	public setEmployeeService(EmployeeCrudServiceImpl employeeService) {
+	public void setEmployeeService(EmployeeCrudServiceImpl employeeService) {
 		this.employeeService = employeeService;
 	}
 

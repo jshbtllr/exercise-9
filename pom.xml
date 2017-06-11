@@ -20,17 +20,20 @@
 		<java-version>1.8</java-version>
 		<compiler-plugin-version>3.6.1</compiler-plugin-version>
 		<commons-dependency-version>3.5</commons-dependency-version>
-		<hibernate-dependency-version>4.3.11.Final</hibernate-dependency-version>
+		<hibernate-dependency-version>4.2.21.Final</hibernate-dependency-version>
 		<postgres-driver-version>9.4.1212</postgres-driver-version>
 		<javassist-version>3.12.1.GA</javassist-version>
 		<sql-maven-plugin-version>1.5</sql-maven-plugin-version>
 		<commons-validator-version>1.6</commons-validator-version>
 		<hibernate-cache-provider>org.hibernate.cache.ehcache.EhCacheRegionFactory</hibernate-cache-provider>
-		<hibernate-ehcache-version>4.3.8.Final</hibernate-ehcache-version>
+		<hibernate-ehcache-version>4.2.21.Final</hibernate-ehcache-version>
 		<buildtool-sql>src/main/resources/05_26_2017_01.sql</buildtool-sql>
 		<jetty-version>9.4.5.v20170502</jetty-version>
 		<servlet-version>3.1.0</servlet-version>
-		<spring-version>2.5.6.SEC03</spring-version>
+		<spring-version>3.1.0.RELEASE</spring-version>
+		<datasource-version>1.4</datasource-version>
+		<aspectj-version>1.8.10</aspectj-version>
+		<cglib-version>3.1</cglib-version>
 	</properties>
 
 	<profiles>
@@ -175,6 +178,28 @@
 			    <artifactId>spring-webmvc</artifactId>
 			    <version>${spring-version}</version>
 			</dependency>
+
+	<!-- AOP related dependencies -->
+
+			<dependency>
+			    <groupId>org.aspectj</groupId>
+			    <artifactId>aspectjweaver</artifactId>
+			    <version>${aspectj-version}</version>
+			</dependency>			
+
+			<dependency>
+			    <groupId>cglib</groupId>
+			    <artifactId>cglib</artifactId>
+			    <version>${cglib-version}</version>
+			</dependency>			
+
+	<!-- DataSource Dependency for LocalSessionFactoryBean -->
+			<dependency>
+			    <groupId>commons-dbcp</groupId>
+			    <artifactId>commons-dbcp</artifactId>
+			    <version>${datasource-version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
