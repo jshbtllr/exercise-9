@@ -7,4 +7,12 @@
     <bean name="/employee" class="com.exercise9.app.EmployeeController">
     	<property name="employeeService" ref="employeeService"/>
     </bean>
+
+    <bean name="/roles" class="com.exercise9.app.RoleController">
+    	<property name="roleService" ref="roleService"/>
+    </bean>   
+
+    <bean name="/roles/update" class="com.exercise9.app.RoleUpdateController">
+    	<property name="roleService" ref="roleService"/>
+    </bean>
 </beans>

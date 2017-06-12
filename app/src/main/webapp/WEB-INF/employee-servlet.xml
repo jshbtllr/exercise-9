@@ -12,6 +12,7 @@
    <import resource="classpath:app.xml"/>
    <import resource="classpath:dao.xml"/>
    <import resource="classpath:service.xml"/>
+   <import resource="classpath:persistence.xml"/>
 
 
    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

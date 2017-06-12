@@ -16,11 +16,4 @@
     	<property name="configLocation" value="classpath:hibernate.cfg.xml"/>
     	<property name="dataSource" ref="hibernateSource"/>
     </bean>
-
-    <bean id="hibernateSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-    	<property name="driverClassName" value="org.postgresql.Driver"/>
-    	<property name="url" value="jdbc:postgresql://localhost:5432/employeeregistration"/>
-    	<property name="username" value="postgres"/>
-    	<property name="password" value="ex1stgl0bal"/>
-    </bean>
 </beans>

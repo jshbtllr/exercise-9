@@ -17,7 +17,7 @@
 			<td width=30% align="center">
 				<a href="roles"> Role Management </a>
 			</td>
-			<td width=40% aligmn="right">
+			<td width=40% align="right">
 				<form action="employee" method="GET">
 					Sort by: 
 					<select name="sort">

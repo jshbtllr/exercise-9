@@ -22,13 +22,6 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class EmployeeDAO extends GenericDAOImpl <Employee> {
-	
-/*	SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}*/
-
 	public List <Employee> showEmployees(Integer sort, Boolean ascending) {
 		Criteria criteria = null;
 		List <Employee> list = null;

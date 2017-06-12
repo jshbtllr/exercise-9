@@ -47,4 +47,10 @@ public class RoleCrudServiceImpl implements CrudServiceInterface <Roles> {
 			return role;
 		}
 	}
+
+	public Roles get(Long roleId) {
+		Roles role = new Roles();
+		role = roleDao.get(Roles.class, roleId);
+		return role;
+	}
 }	

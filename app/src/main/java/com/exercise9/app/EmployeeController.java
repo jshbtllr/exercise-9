@@ -19,7 +19,8 @@ public class EmployeeController extends SimpleFormController{
 	private static final Integer sortByGrade = new Integer(2);
 	private static final Integer sortByHire = new Integer(3);
 	private static final Integer sortById = new Integer(4);
-	private Boolean ascending = true;
+	private static final Boolean ascending = true;
+	private static final Boolean descending = false;
 
 	public void setEmployeeService(EmployeeCrudServiceImpl employeeService) {
 		this.employeeService = employeeService;
@@ -31,8 +32,31 @@ public class EmployeeController extends SimpleFormController{
 	}
 
 	protected ModelAndView showForm(HttpServletRequest request, HttpServletResponse response, BindException bindException) {
+		String sort = request.getParameter("sort");
+		String order = request.getParameter("order");
+		Integer sortType = null;
+		Boolean orderType = null;
+
+		if(sort == null) {
+			sortType = sortById;
+		} else {
+			if(sort.equals("lastname")) {
+				sortType = sortByName;
+			} else if(sort.equals("gwa")) {
+				sortType = sortByGrade;
+			} else if(sort.equals("hiredate")) {
+				sortType = sortByHire;
+			}
+		}
+
+		if((order == null) || (order.equals("ascending"))) {
+			orderType = ascending;
+		} else {
+			orderType = descending;
+		}
+
 		ModelAndView modelAndView = new ModelAndView("home");
-		List <Employee> employeeList = employeeService.read(sortById, ascending);
+		List <Employee> employeeList = employeeService.read(sortType, orderType);
 		modelAndView.addObject("employees",employeeList);
 
 		return modelAndView;
