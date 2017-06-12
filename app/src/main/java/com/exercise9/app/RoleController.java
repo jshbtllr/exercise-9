@@ -58,13 +58,13 @@ public class RoleController extends SimpleFormController{
 		Long roleId = Long.parseLong(request.getParameter("roleId"));
 		Roles role = roleService.delete(roleId);
 
+		ModelAndView modelAndView = new ModelAndView("roles");
 		if(role.getRoleCode() == null) {
-			System.out.println("Role still assigned to employee");
+			modelAndView.addObject("message","Role still assigned to employee<br/>Role unsuccessfully deleted");
 		} else {
-			System.out.println("Role deleted");
+			modelAndView.addObject("message","Role successfully deleted");
 		}
 
-		ModelAndView modelAndView = new ModelAndView("roles");
 		List <Roles> roleList = roleService.read(sortById, ascending);
 		modelAndView.addObject("roles", roleList);
 

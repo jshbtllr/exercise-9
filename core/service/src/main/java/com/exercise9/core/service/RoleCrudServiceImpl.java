@@ -14,6 +14,7 @@ public class RoleCrudServiceImpl implements CrudServiceInterface <Roles> {
 
 	public Roles create(Roles role) {
 		if (roleDao.checkDuplicateRole(role, 1)) {
+			role.setRoleName(" ");
 			return role;
 		} else {
 			role = roleDao.add(role);

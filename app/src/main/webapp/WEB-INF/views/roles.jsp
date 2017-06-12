@@ -8,6 +8,9 @@
 		<title>Role Management</title>
 	</head>
 	<body>
+		<core:if test="${not empty message}">
+			<h2>${message}</h2>
+		</core:if>
 		<h3>Role Management</h3>
 		<h4>Current Roles</h4>
 		<table width=100%>
@@ -15,7 +18,7 @@
 				<a href="/employee"> Back to Employee <br/> Management </a>
 			</td>
 			<td width=30% align="center">
-				<a href="roles/add"> Add Roles </a>
+				<a href="/roles/add"> Add Roles </a>
 			</td>
 			<td width=40% align="right">
 				<form action="roles" method="GET">
@@ -50,11 +53,11 @@
 						<td align="center">${role.roleCode}</td>
 						<td align="center">${role.roleName}</td>
 						<td align="center">
-							<form action="roles" method="POST">
+							<form roles="/action" method="POST">
 								<input type="hidden" name="roleId" value="${role.id}"/>
 								<input type="submit" value="delete"/>
 							</form>
-							<form action="roles/update" method="GET">
+							<form action="/roles/update" method="GET">
 								<input type="hidden" name="roleId" value="${role.id}"/>
 								<input type="submit" value="update"/>
 							</form>

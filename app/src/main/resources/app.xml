@@ -15,4 +15,8 @@
     <bean name="/roles/update" class="com.exercise9.app.RoleUpdateController">
     	<property name="roleService" ref="roleService"/>
     </bean>
+
+    <bean name="/roles/add" class="com.exercise9.app.RoleAddController">
+        <property name="roleService" ref="roleService"/>
+    </bean>
 </beans>

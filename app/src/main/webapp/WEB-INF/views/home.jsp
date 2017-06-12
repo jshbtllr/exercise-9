@@ -12,10 +12,10 @@
 		<h4>Current Employees</h4>
 		<table width=100%>
 			<td width=30% align="left">
-				<a href="employee/add"> Add Employee </a>
+				<a href="/employee/add"> Add Employee </a>
 			</td>
 			<td width=30% align="center">
-				<a href="roles"> Role Management </a>
+				<a href="/roles"> Role Management </a>
 			</td>
 			<td width=40% align="right">
 				<form action="employee" method="GET">
