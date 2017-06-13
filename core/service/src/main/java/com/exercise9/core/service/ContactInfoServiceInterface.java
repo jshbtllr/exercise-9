@@ -9,4 +9,5 @@ public interface ContactInfoServiceInterface {
 	public ContactInfo checkInfo(ContactInfo info);
 	public Integer removeContactInfo(Long employeeId, ContactInfo deleteContact);
 	public Integer updateContactInfo(Long employeeId, ContactInfo updateContact, String newInfoDetail);
+	public Set <ContactInfo> getCurrentContacts(Long employeeId);
 }

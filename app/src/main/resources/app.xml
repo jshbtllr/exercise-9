@@ -19,4 +19,10 @@
     <bean name="/roles/add" class="com.exercise9.app.RoleAddController">
         <property name="roleService" ref="roleService"/>
     </bean>
+
+    <bean name="/employee/update" class="com.exercise9.app.EmployeeUpdateController">
+    	<property name="employeeService" ref="employeeService"/>
+    	<property name="roleService" ref="roleService"/>
+    	<property name="employeeRoleService" ref="employeeRoleService"/>
+    </bean>
 </beans>

@@ -55,12 +55,12 @@
 					<td align="center">${employee.id}</td>
 					<td align="center">${employee.name.title} ${employee.name.firstName} ${employee.name.middleName} ${employee.name.lastName} ${employee.name.suffix}</td>
 					<td align="center">${employee.address.streetNumber} ${employee.address.barangay} ${employee.address.city} ${employee.address.country} ${employee.address.zipcode}</td>
-					<td align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${employee.birthday}"/></td>
+					<td align="center"><fmt:formatDate pattern="yyyy/MM/dd" value="${employee.birthday}"/></td>
 					<td align="center">${employee.gradeWeightAverage}</td>
 					<core:choose>
 						<core:when test="${employee.employed}">
 							<td align="center">Yes</td>
-							<td align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${employee.hireDate}"/></td>
+							<td align="center"><fmt:formatDate pattern="yyyy/MM/dd" value="${employee.hireDate}"/></td>
 						</core:when>
 						<core:otherwise>
 							<td align="center">No</td>
@@ -92,7 +92,14 @@
 						</core:otherwise>
 					</core:choose>
 					<td align="center">
-						PUT ACTIONS
+						<form action="/employee" method="POST">
+							<input type="hidden" name="employeeId" value="${employee.id}"/>
+							<input type="submit" value="delete"/>
+						</form>
+						<form action="/employee/update" method="GET">
+							<input type="hidden" name="employeeId" value="${employee.id}"/>
+							<input type="submit" value="update"/>
+						</form>
 					</td>
 				</tr>
 				</core:forEach>

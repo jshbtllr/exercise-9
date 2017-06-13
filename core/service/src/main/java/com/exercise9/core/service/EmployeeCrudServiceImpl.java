@@ -53,6 +53,13 @@ public class EmployeeCrudServiceImpl implements CrudServiceInterface <Employee> 
 	public Employee update(Employee employee) {
 		return employeeDao.update(employee);
 	}
+
+	public Employee get(Long employeeId) {
+		Employee employee = new Employee();
+		employee = employeeDao.get(Employee.class, employeeId);
+
+		return employee;
+	}
 }
 
 class gwaComparator implements Comparator <Employee> {

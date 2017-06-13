@@ -8,9 +8,6 @@
 		<title>Role Management</title>
 	</head>
 	<body>
-		<core:if test="${not empty message}">
-			<h2>${message}</h2>
-		</core:if>
 		<h3>Role Management</h3>
 		<h4>Current Roles</h4>
 		<table width=100%>

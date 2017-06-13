@@ -6,63 +6,55 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.BindException;
 import java.util.List;
+import java.util.Set;
 import com.exercise9.core.model.Employee;
 import com.exercise9.core.model.Name;
 import com.exercise9.core.model.Address;
 import com.exercise9.core.model.Roles;
 import com.exercise9.core.model.ContactInfo;
 import com.exercise9.core.service.EmployeeCrudServiceImpl;
+import com.exercise9.core.service.RoleCrudServiceImpl;
+import com.exercise9.core.service.EmployeeRoleServiceImpl;
 
-public class EmployeeController extends SimpleFormController{
+public class EmployeeUpdateController extends SimpleFormController{
 	private EmployeeCrudServiceImpl employeeService;
-	private static final Integer sortByName = new Integer(1);
-	private static final Integer sortByGrade = new Integer(2);
-	private static final Integer sortByHire = new Integer(3);
-	private static final Integer sortById = new Integer(4);
+	private RoleCrudServiceImpl roleService;
+	private EmployeeRoleServiceImpl employeeRoleService;
+	private static final Integer sortById = new Integer(1);
 	private static final Boolean ascending = true;
-	private static final Boolean descending = false;
 
 	public void setEmployeeService(EmployeeCrudServiceImpl employeeService) {
 		this.employeeService = employeeService;
 	}
 
-	public EmployeeController() {
+	public void setRoleService(RoleCrudServiceImpl roleService) {
+		this.roleService = roleService;
+	}
+
+	public void setEmployeeRoleService(EmployeeRoleServiceImpl employeeRoleService) {
+		this.employeeRoleService = employeeRoleService;
+	}
+
+	public EmployeeUpdateController() {
 		setCommandClass(Employee.class);
 		setCommandName("employee");
 	}
 
 	protected ModelAndView showForm(HttpServletRequest request, HttpServletResponse response, BindException bindException) {
-		String sort = request.getParameter("sort");
-		String order = request.getParameter("order");
-		Integer sortType = null;
-		Boolean orderType = null;
+		Long employeeId = Long.parseLong(request.getParameter("employeeId"));
+		Employee employee = employeeService.get(employeeId);
+		Set <Roles> currentRoles = employeeRoleService.getCurrentRoles(employeeId);
+		List <Roles> roleList = roleService.read(sortById, ascending);
 
-		if(sort == null) {
-			sortType = sortById;
-		} else {
-			if(sort.equals("lastname")) {
-				sortType = sortByName;
-			} else if(sort.equals("gwa")) {
-				sortType = sortByGrade;
-			} else if(sort.equals("hiredate")) {
-				sortType = sortByHire;
-			}
-		}
-
-		if((order == null) || (order.equals("ascending"))) {
-			orderType = ascending;
-		} else {
-			orderType = descending;
-		}
-
-		ModelAndView modelAndView = new ModelAndView("home");
-		List <Employee> employeeList = employeeService.read(sortType, orderType);
-		modelAndView.addObject("employees",employeeList);
+		ModelAndView modelAndView = new ModelAndView("employeeupdateform");
+		modelAndView.addObject("employee", employee);
+		modelAndView.addObject("currentRoles", currentRoles);
+		modelAndView.addObject("roleList", roleList);
 
 		return modelAndView;
 	}
 
-	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
+/*	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
 		Long employeeId = Long.parseLong(request.getParameter("employeeId"));
 		Employee employee = employeeService.delete(employeeId);
 
@@ -71,5 +63,5 @@ public class EmployeeController extends SimpleFormController{
 		modelAndView.addObject("employees", employeeList);
 
 		return modelAndView;
-	}
+	}*/
 }

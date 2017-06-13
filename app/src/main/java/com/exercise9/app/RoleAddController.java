@@ -37,16 +37,14 @@ public class RoleAddController extends SimpleFormController{
 
 		role = roleService.create(role);
 
-		ModelAndView modelAndView = new ModelAndView("roles");
+		ModelAndView modelAndView = new ModelAndView("message");
 		if(role.getRoleName() == " ") {
 			modelAndView.addObject("message", "Role Code already exists<br/>Role was not added");
 		} else {
 			modelAndView.addObject("message", "Role successfully added");
 		}
 
-		List <Roles> roleList = roleService.read(sortById, ascending);
-		modelAndView.addObject("roles", roleList);
-
+		modelAndView.addObject("redirectView", "http://localhost:8080/roles");
 		return modelAndView;
 	}
 }

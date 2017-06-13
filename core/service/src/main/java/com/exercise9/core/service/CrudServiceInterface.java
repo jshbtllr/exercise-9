@@ -6,4 +6,5 @@ public interface CrudServiceInterface <T> {
 	public List <T> read(Integer sort, Boolean order);
 	public T delete(Long id);
 	public T update(T updated);
+	public T get(Long id);
 }

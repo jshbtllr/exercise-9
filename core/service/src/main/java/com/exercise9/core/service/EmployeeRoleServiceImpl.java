@@ -87,4 +87,9 @@ public class EmployeeRoleServiceImpl implements EmployeeRoleServiceInterface {
 
 		return roles;
 	}	
+
+	public Set <Roles> getCurrentRoles(Long employeeId) {
+		Set <Roles> currentRoles = employeeDao.getEmployeeCollection(employeeId).getRole();
+		return currentRoles;
+	}
 }
