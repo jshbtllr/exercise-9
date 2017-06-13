@@ -132,7 +132,7 @@ public class ContactInfoServiceImpl implements ContactInfoServiceInterface {
 		return 1;
 	}
 
-	public Set <ContactInfo> getEmployeeContacts(Long employeeId) {
+	public Set <ContactInfo> getCurrentContacts(Long employeeId) {
 		Set <ContactInfo> contactList = employeeDao.getEmployeeCollection(employeeId).getContactInfo();
 		return contactList;
 	}

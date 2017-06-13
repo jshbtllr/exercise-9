@@ -106,6 +106,36 @@
 						/>
 					</td>
 				</tr>
+				<tr>
+					<td align="left"> Update Current Contact Info </td><br/>
+					<core:forEach var="contact" items="${contacts}">
+						<td>
+							<select name="infoType">
+								<option value="email"
+									<core:if test="${contact.infoType == 'email'}">
+										selected
+									</core:if>
+									> email 
+								</option>
+								<option value="telephone"
+									<core:if test="${contact.infoType == 'telephone'}">
+										selected
+									</core:if>
+									> telephone 
+								</option>
+								<option value="cellphone"
+									<core:if test="${contact.infoType == 'cellphone'}">
+										selected
+									</core:if>
+									> cellphone 
+								</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="infoDetail" value="${contact.infoDetail}" maxlength=255/>
+						</td>
+					</core:forEach>
+				</tr>
 				<tr width=50% align="left">
 					<td align="left"> Update Current Roles </td><br/>
 					<table width=50% border="1" align="center">

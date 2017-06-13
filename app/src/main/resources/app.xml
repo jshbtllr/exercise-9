@@ -24,5 +24,13 @@
     	<property name="employeeService" ref="employeeService"/>
     	<property name="roleService" ref="roleService"/>
     	<property name="employeeRoleService" ref="employeeRoleService"/>
+    	<property name="contactInfoService" ref="contactInfoService"/>
+    </bean>
+
+    <bean name="/employee/add" class="com.exercise9.app.EmployeeAddController">
+    	<property name="employeeService" ref="employeeService"/>
+    	<property name="roleService" ref="roleService"/>
+    	<property name="employeeRoleService" ref="employeeRoleService"/>
+    	<property name="contactInfoService" ref="contactInfoService"/>
     </bean>
 </beans>

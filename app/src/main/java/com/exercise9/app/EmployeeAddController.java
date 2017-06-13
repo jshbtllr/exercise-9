@@ -17,7 +17,7 @@ import com.exercise9.core.service.RoleCrudServiceImpl;
 import com.exercise9.core.service.EmployeeRoleServiceImpl;
 import com.exercise9.core.service.ContactInfoServiceImpl;
 
-public class EmployeeUpdateController extends SimpleFormController{
+public class EmployeeAddController extends SimpleFormController{
 	private EmployeeCrudServiceImpl employeeService;
 	private RoleCrudServiceImpl roleService;
 	private EmployeeRoleServiceImpl employeeRoleService;
@@ -41,7 +41,7 @@ public class EmployeeUpdateController extends SimpleFormController{
 		this.contactInfoService = contactInfoService;
 	}
 
-	public EmployeeUpdateController() {
+	public EmployeeAddController() {
 		setCommandClass(Employee.class);
 		setCommandName("employee");
 	}
@@ -53,7 +53,7 @@ public class EmployeeUpdateController extends SimpleFormController{
 		List <Roles> roleList = roleService.read(sortById, ascending);
 		Set <ContactInfo> contacts = contactInfoService.getCurrentContacts(employeeId);
 
-		ModelAndView modelAndView = new ModelAndView("employeeupdateform");
+		ModelAndView modelAndView = new ModelAndView("employeeaddform");
 		modelAndView.addObject("employee", employee);
 		modelAndView.addObject("currentRoles", currentRoles);
 		modelAndView.addObject("roleList", roleList);
