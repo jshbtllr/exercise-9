@@ -1,35 +1,39 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix = "spring" uri = "http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 
 <html>
 	<head>
-		<title>Employee Management</title>
+		<title><spring:message code="employee.management"/></title>
 	</head>
 	<body>
-		<h3>Employee Management</h3>
-		<h4>Current Employees</h4>
+		<h3><spring:message code="employee.management"/></h3>
+		<h4><spring:message code="current.employee"/></h4>
 		<table width=100%>
-			<td width=30% align="left">
-				<a href="/employee/add"> Add Employee </a>
+			<td width=20% align="left">
+				<a href="/employee/add"> <spring:message code="employee.add"/> </a>
 			</td>
-			<td width=30% align="center">
-				<a href="/roles"> Role Management </a>
+			<td width=20% align="left">
+				Language: <a href="?language=en"> <spring:message code="english"/> </a> | <a href="?language=de"> <spring:message code="german"/> </a>
+			</td>
+			<td width=20% align="left">
+				<a href="/roles"> <spring:message code="role.title"/> </a>
 			</td>
 			<td width=40% align="right">
 				<form action="employee" method="GET">
-					Sort by: 
+					<spring:message code="sortby"/>
 					<select name="sort">
-						<option value="lastname"> Last Name </option>
-						<option value="gwa"> Grade </option>
-						<option value="hiredate"> Hire Date </option>
+						<option value="lastname"> <spring:message code="lastname"/> </option>
+						<option value="gwa"> <spring:message code="grade"/> </option>
+						<option value="hiredate"> <spring:message code="hiredate"/> </option>
 					</select>
 					<select name="order">
-						<option value="ascending"> Ascending </option>
-						<option value="descending"> Descending </option>
+						<option value="ascending"> <spring:message code="ascending"/> </option>
+						<option value="descending"> <spring:message code="descending"/> </option>
 					</select>
-					<input type="submit" value="sort"/>
+					<input type="submit" value="<spring:message code="sort"/>"/>
 				</form>
 			</td>
 		</table>
@@ -38,15 +42,15 @@
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th width=15%>Full Name</th>
-					<th width=15%>Address</th>
-					<th>Birthdate</th>
-					<th>Grade</th>
-					<th>Employed</th>
-					<th>Hire Date</th>
-					<th width=20%>Contact Info</th>
-					<th width=15%>Roles</th>
-					<th>Actions</th>
+					<th width=15%>Name</th>
+					<th width=15%><spring:message code="address"/></th>
+					<th><spring:message code="birthday"/></th>
+					<th><spring:message code="grade"/></th>
+					<th><spring:message code="employment.status"/></th>
+					<th><spring:message code="hiredate"/></th>
+					<th width=20%><spring:message code="contact.info"/></th>
+					<th width=15%><spring:message code="role.head"/></th>
+					<th><spring:message code="action"/></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,17 +63,17 @@
 					<td align="center">${employee.gradeWeightAverage}</td>
 					<core:choose>
 						<core:when test="${employee.employed}">
-							<td align="center">Yes</td>
+							<td align="center"><spring:message code="yes"/></td>
 							<td align="center"><fmt:formatDate pattern="yyyy/MM/dd" value="${employee.hireDate}"/></td>
 						</core:when>
 						<core:otherwise>
-							<td align="center">No</td>
+							<td align="center"><spring:message code="no"/></td>
 							<td align="center">N/A</td>
 						</core:otherwise>
 					</core:choose>
 					<core:choose>
 						<core:when test="${empty employee.contactInfo}">
-							<td align="center">No Contacts Available</td>
+							<td align="center"><spring:message code="no.contacts"/></td>
 						</core:when>
 						<core:otherwise>
 							<td align="center">
@@ -81,7 +85,7 @@
 					</core:choose>
 					<core:choose>
 						<core:when test="${empty employee.role}">
-							<td align="center">No Roles Available</td>
+							<td align="center"><spring:message code="no.roles"/></td>
 						</core:when>
 						<core:otherwise>
 							<td align="center">
@@ -94,11 +98,11 @@
 					<td align="center">
 						<form action="/employee" method="POST">
 							<input type="hidden" name="employeeId" value="${employee.id}"/>
-							<input type="submit" value="delete"/>
+							<input type="submit" value="<spring:message code="delete"/>"/>
 						</form>
 						<form action="/employee/update" method="GET">
 							<input type="hidden" name="employeeId" value="${employee.id}"/>
-							<input type="submit" value="update"/>
+							<input type="submit" value="<spring:message code="update"/>"/>
 						</form>
 					</td>
 				</tr>

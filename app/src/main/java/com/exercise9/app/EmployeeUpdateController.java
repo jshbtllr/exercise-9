@@ -7,6 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.BindException;
 import java.util.List;
 import java.util.Set;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Arrays;
 import com.exercise9.core.model.Employee;
 import com.exercise9.core.model.Name;
 import com.exercise9.core.model.Address;
@@ -16,12 +19,14 @@ import com.exercise9.core.service.EmployeeCrudServiceImpl;
 import com.exercise9.core.service.RoleCrudServiceImpl;
 import com.exercise9.core.service.EmployeeRoleServiceImpl;
 import com.exercise9.core.service.ContactInfoServiceImpl;
+import com.exercise9.util.InputUtil;
 
 public class EmployeeUpdateController extends SimpleFormController{
 	private EmployeeCrudServiceImpl employeeService;
 	private RoleCrudServiceImpl roleService;
 	private EmployeeRoleServiceImpl employeeRoleService;
 	private ContactInfoServiceImpl contactInfoService;
+	private InputUtil inputUtil;
 	private static final Integer sortById = new Integer(1);
 	private static final Boolean ascending = true;
 
@@ -39,6 +44,10 @@ public class EmployeeUpdateController extends SimpleFormController{
 
 	public void setContactInfoService(ContactInfoServiceImpl contactInfoService) {
 		this.contactInfoService = contactInfoService;
+	}
+
+	public void setInputUtil(InputUtil inputUtil) {
+		this.inputUtil = inputUtil;
 	}
 
 	public EmployeeUpdateController() {
@@ -62,14 +71,118 @@ public class EmployeeUpdateController extends SimpleFormController{
 		return modelAndView;
 	}
 
-/*	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
+	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
+		Set <ContactInfo> contacts = new HashSet <ContactInfo>();
+		Set <Roles> role = new HashSet <Roles>();
+		Address address = null;
+		Name name = null;
+		Employee employee = null;
+		ContactInfo info = null;		
 		Long employeeId = Long.parseLong(request.getParameter("employeeId"));
-		Employee employee = employeeService.delete(employeeId);
+		String title = request.getParameter("title");
+		String firstName = request.getParameter("firstName");
+		String middleName = request.getParameter("middleName");
+		String lastName = request.getParameter("lastName");
+		String suffix = request.getParameter("suffix");
+		String streetNumber = request.getParameter("streetNumber");
+		String barangay = request.getParameter("barangay");
+		String city = request.getParameter("city");
+		String country = request.getParameter("country");
+		String zipcode = request.getParameter("zipcode");
+		Boolean employed = Boolean.parseBoolean(request.getParameter("employed"));
+		String birth = request.getParameter("birthday");
+		String hire = request.getParameter("hireDate");
+	    Float gradeWeightAverage = null;
+	    Date birthdate = null;
+	    Date hireDate = null;
+		String infoType = request.getParameter("infoType");
+	    String infoDetail = request.getParameter("infoDetail");	   
+	    List <String> addedRole = Arrays.asList(request.getParameterValues("roles"));
+		Boolean gradeFlag = false;
+		Boolean hireFlag = false;
+		Boolean successFlag = true;
+		Boolean birthFlag = false;
+		Boolean contactFlag = false;		
+		StringBuilder message = new StringBuilder();    
 
-		ModelAndView modelAndView = new ModelAndView("home");
-		List <Employee> employeeList = employeeService.read(sortById, ascending);
-		modelAndView.addObject("employees", employeeList);
+	    try {
+	    	gradeWeightAverage = Float.parseFloat(request.getParameter("gwa"));
+	    } catch (NumberFormatException nfe) {
+	    	gradeFlag = true;
+	    	successFlag = false;
+	    }
+
+	    if(gradeFlag != true) {
+	    	if(!inputUtil.checkGrade(gradeWeightAverage)) {
+	    		gradeFlag = true;
+	    		successFlag = false;
+	    	}
+	    }
+
+	    if(employed) {
+	    	if(inputUtil.checkDate(hire)) {
+	    		hireDate = inputUtil.getDate(hire);
+	    	} else {
+	    		hireFlag = true;
+	    		successFlag = false;
+	    	}
+	    } else {
+	    	hireDate = inputUtil.getDate("31/12/9999");
+	    }
+
+	    if(inputUtil.checkDate(birth)) {
+	    	birthdate = inputUtil.getDate(birth);
+	    } else {
+	    	birthFlag = true;
+	    	successFlag = false;
+	    }
+
+	    info = new ContactInfo(infoType, infoDetail);
+	    if(!info.getInfoDetail().equals("")) {
+	    	info = contactInfoService.checkInfo(info);
+		    if(info.getInfoType().equals(" ")) {
+		    	contactFlag = true;
+		    	successFlag = false;
+		    } else {
+		 	   contacts.add(info);    	
+			}
+	    }
+
+	    if(successFlag == true) {
+	    	name = new Name(firstName, lastName, middleName, suffix, title);
+	    	address = new Address(streetNumber, barangay, city, country, zipcode);
+	    	for(String add : addedRole) {
+	    		Long roleId = Long.parseLong(add);
+	    		Roles in = roleService.get(roleId);
+	    		role.add(in);
+	    	}
+	    	employee = new Employee(name, address, birthdate, gradeWeightAverage, hireDate, employed, 
+					contacts, role);
+
+	    	employee.setId(employeeId);
+	    	employeeService.update(employee);
+	    	message.append("Employee Successfully updated");
+	    } else {
+	    	if(gradeFlag) {
+	    		message.append("Invalid GWA input<br/>");
+	    	}
+	    	if (hireFlag) {
+	    		message.append("Invalid Hire Date<br/>");
+	    	}
+	    	if(birthFlag) {
+	    		message.append("Invalid Birthdate<br/>");
+	    	}
+	    	if(contactFlag) {
+	    		message.append("Invalid Contact Information<br/>");
+	    	}
+
+	    	message.append("Employee not updated");
+	    }
+
+		ModelAndView modelAndView = new ModelAndView("message");
+		modelAndView.addObject("message", message);
+		modelAndView.addObject("redirectView", "http://localhost:8080/employee");
 
 		return modelAndView;
-	}*/
+	}
 }

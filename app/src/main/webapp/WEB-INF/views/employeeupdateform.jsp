@@ -1,16 +1,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix = "spring" uri = "http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 
 <html>
 	<head>
-		<title>Employee Management</title>
+		<title><spring:message code="employee.management"/></title>
 	</head>
 	<body>
-		<h3>Update Employee</h3>
-		<a href="/employee"> Back to Employee <br/> Management </a><br/>
-		<form action="employee/update" method="GET">
+		<h3><spring:message code="employee.update"/></h3>
+		<table width=100%>
+			<td width=50% align="left">
+				<a href="/employee"> <spring:message code="back"/> </a><br/>
+			</td>
+		</table>
+		<div style="clear:both;"></div><br/>		
+		<form action="/employee/update" method="POST">
 			<table align="left" cellpadding="8" width=100%>
 				<tr>
 					<td> Name </td>
@@ -33,14 +39,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="center" width=20%> Title </td>
-					<td align="center" width=20%> First Name </td>
-					<td align="center" width=20%> Middle Name </td>
-					<td align="center" width=20%> Last Name </td>
-					<td align="center" width=20%> Suffix </td>
+					<td align="center" width=20%> <spring:message code="title"/> </td>
+					<td align="center" width=20%> <spring:message code="firstname"/> </td>
+					<td align="center" width=20%> <spring:message code="middlename"/> </td>
+					<td align="center" width=20%> <spring:message code="lastname"/> </td>
+					<td align="center" width=20%> <spring:message code="suffix"/> </td>
 				</tr>								
 				<tr>
-					<td> Address </td>
+					<td> <spring:message code="address"/> </td>
 				</tr>
 				<tr>
 					<td align="center" width=20%> 
@@ -60,39 +66,39 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="center" width=20%> Street Number </td>
+					<td align="center" width=20%> <spring:message code="streetnumber"/> </td>
 					<td align="center" width=20%> Barangay </td>
-					<td align="center" width=20%> City </td>
-					<td align="center" width=20%> Country </td>
-					<td align="center" width=20%> Zipcode </td>
+					<td align="center" width=20%> <spring:message code="city"/> </td>
+					<td align="center" width=20%> <spring:message code="country"/> </td>
+					<td align="center" width=20%> <spring:message code="zipcode"/> </td>
 				</tr>				
 				<tr>
-					<td align="left" width=20%> Birthday </td>
+					<td align="left" width=20%> <spring:message code="birthday"/> </td>
 					<td align="left" width=20%>
 						<input type="text" name="birthday" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${employee.birthday}"/>" maxlength="10" required/>
 					</td>
 					<td width=20%/>
-					<td align="left" width=20%> Grade </td>
+					<td align="left" width=20%> <spring:message code="grade"/> </td>
 					<td align="left" width=20%>
 						<input type="text" name="gwa" value="${employee.gradeWeightAverage}" maxlength="6" required/>
 					</td>
 				</tr>
 				<tr>
-					<td align="left" width=20%> Employed? </td>
+					<td align="left" width=20%> <spring:message code="employment.status"/> </td>
 					<td align="center" width=20%>
 						<input type="radio" name="employed" value="true" onclick="document.getElementById('hiredate').disable = false;" required
 						<core:if test="${employee.employed}">
 								checked
 						</core:if>
-						> Yes </input>
+						> <spring:message code="yes"/> </input>
 						<input type="radio" name="employed" value="false" onclick="document.getElementById('hiredate').disable = true;" required
 						<core:if test="${not employee.employed}">
 								checked
 						</core:if>
-						> No </input>
+						> <spring:message code="no"/> </input>
 					</td>
 					<td width=20%/>
-					<td width=20% align="left"> Hire Date </td>
+					<td width=20% align="left"> <spring:message code="hiredate"/> </td>
 					<td width=20% align="left">
 						<input type="text" name="hireDate" id="hiredate" maxlength="10" value=
 						<core:choose>
@@ -107,8 +113,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="left"> Update Current Contact Info </td><br/>
-					<core:forEach var="contact" items="${contacts}">
+					<td align="left"> <spring:message code="update.current.contact"/> </td><br/>
+				<!--	<core:forEach var="contact" items="${contacts}">-->
 						<td>
 							<select name="infoType">
 								<option value="email"
@@ -121,28 +127,28 @@
 									<core:if test="${contact.infoType == 'telephone'}">
 										selected
 									</core:if>
-									> telephone 
+									> <spring:message code="telephone"/> 
 								</option>
 								<option value="cellphone"
 									<core:if test="${contact.infoType == 'cellphone'}">
 										selected
 									</core:if>
-									> cellphone 
+									> <spring:message code="cellphone"/> 
 								</option>
 							</select>
 						</td>
 						<td>
-							<input type="text" name="infoDetail" value="${contact.infoDetail}" maxlength=255/>
+							<input type="text" name="infoDetail" value="${contact.infoDetail}" maxlength=255 required/>
 						</td>
-					</core:forEach>
+				<!--	</core:forEach>-->
 				</tr>
 				<tr width=50% align="left">
-					<td align="left"> Update Current Roles </td><br/>
+					<td align="left"> <spring:message code="update.current.role"/> </td><br/>
 					<table width=50% border="1" align="center">
 						<thead>
 							<tr>
-								<th> Role Code </th>
-								<th> Role Name </th>
+								<th> <spring:message code="role.code"/> </th>
+								<th> <spring:message code="role.name"/> </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -163,6 +169,10 @@
 							</core:forEach>
 						</tbody>
 					</table>
+				</tr>
+				<tr width=100% align="center">
+					<input type="hidden" name="employeeId" value="${employee.id}"/>
+					<input type="submit" value="<spring:message code="update"/>"/>
 				</tr>
 			</table>
 		</form>

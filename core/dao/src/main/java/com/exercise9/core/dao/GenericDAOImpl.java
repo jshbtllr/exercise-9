@@ -1,12 +1,5 @@
 package com.exercise9.core.dao;
 
-import com.exercise9.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.Query;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 
 public class GenericDAOImpl <T> implements GenericDAOInterface <T> {

@@ -12,11 +12,14 @@
 		<h3><spring:message code="role.title"/></h3>
 		<h4><spring:message code="role.head"/></h4>
 		<table width=100%>
-			<td width=30% align="left">
+			<td width=20% align="left">
 				<a href="/employee"> <spring:message code="back"/> </a>
 			</td>
-			<td width=30% align="center">
+			<td width=20% align="center">
 				<a href="/roles/add"><spring:message code="role.link"/></a>
+			</td>
+			<td width=20% align="center">
+				Language: <a href="?language=en"> <spring:message code="english"/> </a> | <a href="?language=de"> <spring:message code="german"/> </a>
 			</td>
 			<td width=40% align="right">
 				<form action="roles" method="GET">
@@ -51,7 +54,7 @@
 						<td align="center">${role.roleCode}</td>
 						<td align="center">${role.roleName}</td>
 						<td align="center">
-							<form roles="/action" method="POST">
+							<form roles="/roles" method="POST">
 								<input type="hidden" name="roleId" value="${role.id}"/>
 								<input type="submit" value="<spring:message code="delete"/>"/>
 							</form>
