@@ -21,7 +21,9 @@
 			<td width=20% align="left">
 				<a href="/roles"> <spring:message code="role.title"/> </a>
 			</td>
-			<td width=40% align="right">
+			<td width=10% align="center">
+				<a href="/fileupload"> <spring:message code="file.upload"/> </a>
+			<td width=30% align="right">
 				<form action="employee" method="GET">
 					<spring:message code="sortby"/>
 					<select name="sort">
