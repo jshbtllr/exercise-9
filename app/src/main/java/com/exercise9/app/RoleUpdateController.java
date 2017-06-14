@@ -8,8 +8,10 @@ import org.springframework.validation.BindException;
 import java.util.List;
 import com.exercise9.core.model.Roles;
 import com.exercise9.core.service.RoleCrudServiceImpl;
+import org.apache.log4j.Logger;
 
 public class RoleUpdateController extends SimpleFormController{
+	private Logger logger = Logger.getLogger(RoleUpdateController.class);
 	private static final Integer sortById = new Integer(1);
 	private static final Boolean ascending = true;
 
@@ -25,6 +27,7 @@ public class RoleUpdateController extends SimpleFormController{
 	}
 
 	protected ModelAndView showForm(HttpServletRequest request, HttpServletResponse response, BindException bindException) {
+		logger.info("Update Role showForm()");
 		ModelAndView modelAndView = new ModelAndView("roleupdateform");
 		Long roleId = Long.parseLong(request.getParameter("roleId"));
 		Roles role = roleService.get(roleId);
@@ -33,6 +36,7 @@ public class RoleUpdateController extends SimpleFormController{
 	}
 
 	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
+		logger.info("Update Role onSubmit()");
 		Long roleId = Long.parseLong(request.getParameter("roleId"));
 		String roleCode = request.getParameter("roleCode");
 		String roleName = request.getParameter("roleName");

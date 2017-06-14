@@ -9,8 +9,10 @@ import java.util.List;
 import com.exercise9.core.model.Roles;
 import com.exercise9.core.model.ContactInfo;
 import com.exercise9.core.service.RoleCrudServiceImpl;
+import org.apache.log4j.Logger;
 
 public class RoleController extends SimpleFormController{
+	private Logger logger = Logger.getLogger(RoleController.class);
 	private RoleCrudServiceImpl roleService;
 	private static final Integer sortById = new Integer(1);
 	private static final Integer sortByCode = new Integer(2);
@@ -28,6 +30,7 @@ public class RoleController extends SimpleFormController{
 	}
 
 	protected ModelAndView showForm(HttpServletRequest request, HttpServletResponse response, BindException bindException) {
+		logger.info("Role showForm()");
 		String sort = request.getParameter("sort");
 		String order = request.getParameter("order");
 		Integer sortType = null;
@@ -55,6 +58,7 @@ public class RoleController extends SimpleFormController{
 	}
 
 	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
+		logger.info("Role onSubmit()");
 		Long roleId = Long.parseLong(request.getParameter("roleId"));
 		Roles role = roleService.delete(roleId);
 

@@ -9,8 +9,10 @@ import java.util.List;
 import com.exercise9.core.model.Roles;
 import com.exercise9.core.model.ContactInfo;
 import com.exercise9.core.service.RoleCrudServiceImpl;
+import org.apache.log4j.Logger;
 
 public class RoleAddController extends SimpleFormController{
+	private Logger logger = Logger.getLogger(RoleAddController.class);
 	private static final Integer sortById = new Integer(1);
 	private static final Boolean ascending = true;
 
@@ -26,11 +28,13 @@ public class RoleAddController extends SimpleFormController{
 	}
 
 	protected ModelAndView showForm(HttpServletRequest request, HttpServletResponse response, BindException bindException) {
+		logger.info("Add Role showForm()");
 		ModelAndView modelAndView = new ModelAndView("roleaddform");
 		return modelAndView;
 	}
 
 	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
+		logger.info("Add Role onSubmit()");
 		String roleCode = request.getParameter("roleCode");
 		String roleName = request.getParameter("roleName");
 		Roles role = new Roles(roleName, roleCode);

@@ -6,9 +6,10 @@ import com.exercise9.core.dao.RoleDAO;
 import com.exercise9.core.dao.EmployeeDAO;
 import java.util.Set;
 import java.util.Iterator;
+import org.apache.log4j.Logger;
 
 public class EmployeeRoleServiceImpl implements EmployeeRoleServiceInterface {
-
+	private Logger logger = Logger.getLogger(EmployeeRoleServiceImpl.class);
 	private EmployeeDAO employeeDao;
 	private RoleDAO roleDao;
 
@@ -30,11 +31,13 @@ public class EmployeeRoleServiceImpl implements EmployeeRoleServiceInterface {
 		roleCount = employeeRoles.size();
 
 		if(option == 1) {
+			logger.info("Add Employee Roles");
 			employeeRoles = addRoleSet(employeeRoles, roleId);
 			if(roleCount.equals(employeeRoles.size())) {
 				return 0;
 			}
 		} else {
+			logger.info("Remove Employee Roles");
 			employeeRoles = removeRoleSet(employeeRoles, roleId);
 		}
 
@@ -89,6 +92,7 @@ public class EmployeeRoleServiceImpl implements EmployeeRoleServiceInterface {
 	}	
 
 	public Set <Roles> getCurrentRoles(Long employeeId) {
+		logger.info("Get Current Employee Roles");
 		Set <Roles> currentRoles = employeeDao.getEmployeeCollection(employeeId).getRole();
 		return currentRoles;
 	}

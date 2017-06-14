@@ -4,7 +4,6 @@ import com.exercise9.core.model.Roles;
 import org.hibernate.Query;
 import java.util.List;
 
-
 public class RoleDAO extends GenericDAOImpl <Roles> {
 	public List <Roles> showRoles(Integer sortRule, Boolean ascending) {
 		Query query = null;

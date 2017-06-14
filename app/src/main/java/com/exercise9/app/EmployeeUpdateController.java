@@ -20,8 +20,10 @@ import com.exercise9.core.service.RoleCrudServiceImpl;
 import com.exercise9.core.service.EmployeeRoleServiceImpl;
 import com.exercise9.core.service.ContactInfoServiceImpl;
 import com.exercise9.util.InputUtil;
+import org.apache.log4j.Logger;
 
 public class EmployeeUpdateController extends SimpleFormController{
+	private Logger logger = Logger.getLogger(EmployeeUpdateController.class);
 	private EmployeeCrudServiceImpl employeeService;
 	private RoleCrudServiceImpl roleService;
 	private EmployeeRoleServiceImpl employeeRoleService;
@@ -56,6 +58,7 @@ public class EmployeeUpdateController extends SimpleFormController{
 	}
 
 	protected ModelAndView showForm(HttpServletRequest request, HttpServletResponse response, BindException bindException) {
+		logger.info("Update Controller showForm()");
 		Long employeeId = Long.parseLong(request.getParameter("employeeId"));
 		Employee employee = employeeService.get(employeeId);
 		Set <Roles> currentRoles = employeeRoleService.getCurrentRoles(employeeId);
@@ -72,6 +75,7 @@ public class EmployeeUpdateController extends SimpleFormController{
 	}
 
 	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
+		logger.info("Update Controller onSubmit()");
 		Set <ContactInfo> contacts = new HashSet <ContactInfo>();
 		Set <Roles> role = new HashSet <Roles>();
 		Address address = null;

@@ -19,8 +19,10 @@ import com.exercise9.core.service.EmployeeCrudServiceImpl;
 import com.exercise9.core.service.RoleCrudServiceImpl;
 import com.exercise9.core.service.EmployeeRoleServiceImpl;
 import com.exercise9.core.service.ContactInfoServiceImpl;
+import org.apache.log4j.Logger;
 
 public class CreateEmployeeFromFileImpl {
+	private Logger logger = Logger.getLogger(CreateEmployeeFromFileImpl.class);
 	private InputUtil inputUtil;
 	private ContactInfoServiceImpl contactInfoService;
 	private RoleCrudServiceImpl roleService;
@@ -48,6 +50,7 @@ public class CreateEmployeeFromFileImpl {
 	}	
 
 	public StringBuilder parseFile(MultipartFile file) {
+		logger.info("Parsing the File");
 		Boolean gradeFlag = false;
 		Boolean hireFlag = false;
 		Boolean successFlag = true;

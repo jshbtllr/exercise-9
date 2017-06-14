@@ -11,10 +11,11 @@ import com.exercise9.core.model.Roles;
 import com.exercise9.core.model.FileModel;
 import com.exercise9.core.service.RoleCrudServiceImpl;
 import com.exercise9.core.service.CreateEmployeeFromFileImpl;
+import org.apache.log4j.Logger;
 
 public class FileUploadController extends SimpleFormController{
 	private CreateEmployeeFromFileImpl createEmployeeFromFile;
-
+	private Logger logger = Logger.getLogger(FileUploadController.class);
 	public void setCreateEmployeeFromFile(CreateEmployeeFromFileImpl createEmployeeFromFile) {
 		this.createEmployeeFromFile = createEmployeeFromFile;
 	}
@@ -25,12 +26,13 @@ public class FileUploadController extends SimpleFormController{
 	}
 
 	protected ModelAndView showForm(HttpServletRequest request, HttpServletResponse response, BindException bindException) {
-
+		logger.info("File Upload showForm()");
 		ModelAndView modelAndView = new ModelAndView("uploadform");
 		return modelAndView;
 	}
 
 	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
+		logger.info("File Upload onSubmit()");
 		FileModel fileUploaded = (FileModel) command;
 		MultipartFile multipartFile = fileUploaded.getFile();
 		String message = null;

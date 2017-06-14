@@ -15,9 +15,10 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.Comparator;
+import org.apache.log4j.Logger;
 
 public class EmployeeCrudServiceImpl implements CrudServiceInterface <Employee> {
-
+	private Logger logger = Logger.getLogger(EmployeeCrudServiceImpl.class);
 	private EmployeeDAO employeeDao;
 
 	public void setEmployeeDao(EmployeeDAO employeeDao) {
@@ -29,6 +30,7 @@ public class EmployeeCrudServiceImpl implements CrudServiceInterface <Employee> 
 	}
 
 	public List <Employee> read(Integer sortFunction, Boolean ascending) {
+		logger.info("List Employees");
 		List <Employee> list = employeeDao.showEmployees(sortFunction, ascending);
 
 		if(!list.isEmpty()) {
@@ -45,16 +47,19 @@ public class EmployeeCrudServiceImpl implements CrudServiceInterface <Employee> 
 	}	
 
 	public Employee delete(Long employeeId) {
+		logger.info("Delete Employee");
 		Employee employee = new Employee();
 		employee = employeeDao.get(Employee.class, employeeId);
 		return employeeDao.delete(employee);
 	}
 
 	public Employee update(Employee employee) {
+		logger.info("Update Employee");
 		return employeeDao.update(employee);
 	}
 
 	public Employee get(Long employeeId) {
+		logger.info("Get Employee Details");
 		Employee employee = new Employee();
 		employee = employeeDao.get(Employee.class, employeeId);
 

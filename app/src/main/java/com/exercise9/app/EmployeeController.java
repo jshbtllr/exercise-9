@@ -12,8 +12,10 @@ import com.exercise9.core.model.Address;
 import com.exercise9.core.model.Roles;
 import com.exercise9.core.model.ContactInfo;
 import com.exercise9.core.service.EmployeeCrudServiceImpl;
+import org.apache.log4j.Logger;
 
 public class EmployeeController extends SimpleFormController{
+	private Logger logger = Logger.getLogger(EmployeeController.class);
 	private EmployeeCrudServiceImpl employeeService;
 	private static final Integer sortByName = new Integer(1);
 	private static final Integer sortByGrade = new Integer(2);
@@ -32,6 +34,7 @@ public class EmployeeController extends SimpleFormController{
 	}
 
 	protected ModelAndView showForm(HttpServletRequest request, HttpServletResponse response, BindException bindException) {
+		logger.info("Employee Controller showForm()");
 		String sort = request.getParameter("sort");
 		String order = request.getParameter("order");
 		Integer sortType = null;
@@ -63,6 +66,7 @@ public class EmployeeController extends SimpleFormController{
 	}
 
 	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
+		logger.info("Employee Controller onSubmit()");
 		Long employeeId = Long.parseLong(request.getParameter("employeeId"));
 		Employee employee = employeeService.delete(employeeId);
 

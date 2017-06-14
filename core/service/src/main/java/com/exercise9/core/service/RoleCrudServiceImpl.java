@@ -3,9 +3,10 @@ import com.exercise9.core.model.Roles;
 import com.exercise9.util.InputUtil;
 import com.exercise9.core.dao.RoleDAO;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 public class RoleCrudServiceImpl implements CrudServiceInterface <Roles> {
-
+	private Logger logger = Logger.getLogger(RoleCrudServiceImpl.class);
 	private RoleDAO roleDao;
 
 	public void setRoleDao(RoleDAO roleDao) {
@@ -23,11 +24,13 @@ public class RoleCrudServiceImpl implements CrudServiceInterface <Roles> {
 	}
 
 	public List <Roles> read(Integer sortRule, Boolean ascending) {
+		logger.info("List available Roles");
 		List <Roles> list = roleDao.showRoles(sortRule, ascending);
 		return list;
 	}	
 
 	public Roles update(Roles role) {
+		logger.info("Update available Roles");
 		if(roleDao.checkDuplicateRole(role, 2)) {
 			role.setRoleName(" ");
 			return role;
@@ -38,6 +41,7 @@ public class RoleCrudServiceImpl implements CrudServiceInterface <Roles> {
 	}		
 
 	public Roles delete(Long roleId) {
+		logger.info("Delete available Roles");
 		Roles role = new Roles();
 		role.setId(roleId);
 		if (!(roleDao.checkDuplicateRole(role, 3))) {
@@ -50,6 +54,7 @@ public class RoleCrudServiceImpl implements CrudServiceInterface <Roles> {
 	}
 
 	public Roles get(Long roleId) {
+		logger.info("Get Role Information");
 		Roles role = new Roles();
 		role = roleDao.get(Roles.class, roleId);
 		return role;

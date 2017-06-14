@@ -20,8 +20,10 @@ import com.exercise9.core.service.RoleCrudServiceImpl;
 import com.exercise9.core.service.EmployeeRoleServiceImpl;
 import com.exercise9.core.service.ContactInfoServiceImpl;
 import com.exercise9.util.InputUtil;
+import org.apache.log4j.Logger;
 
 public class EmployeeAddController extends SimpleFormController{
+	private Logger logger = Logger.getLogger(EmployeeAddController.class);
 	private EmployeeCrudServiceImpl employeeService;
 	private RoleCrudServiceImpl roleService;
 	private EmployeeRoleServiceImpl employeeRoleService;
@@ -56,8 +58,8 @@ public class EmployeeAddController extends SimpleFormController{
 	}
 
 	protected ModelAndView showForm(HttpServletRequest request, HttpServletResponse response, BindException bindException) {
+		logger.info("Add Controller showForm()");
 		List <Roles> roleList = roleService.read(sortById, ascending);
-
 		ModelAndView modelAndView = new ModelAndView("employeeaddform");
 		modelAndView.addObject("roleList", roleList);
 
@@ -65,6 +67,7 @@ public class EmployeeAddController extends SimpleFormController{
 	}
 
 	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException bindException) {
+		logger.info("Add Controller onSubmit()");
 		Set <ContactInfo> contacts = new HashSet <ContactInfo>();
 		Set <Roles> role = new HashSet <Roles>();
 		Address address = null;
