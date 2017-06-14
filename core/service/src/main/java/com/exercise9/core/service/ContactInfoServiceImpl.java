@@ -74,6 +74,8 @@ public class ContactInfoServiceImpl implements ContactInfoServiceInterface {
 			if(!info.getInfoDetail().matches("^09\\d{9}")) {
 				info.setInfoType(" ");
 			}			
+		} else {
+			info.setInfoType(" ");
 		}
 
 		return info;		

@@ -37,5 +37,6 @@
     </bean>
 
     <bean name="/fileupload" class="com.exercise9.app.FileUploadController">
+        <property name="createEmployeeFromFile" ref="createEmployeeFromFile"/>
     </bean>
 </beans>
