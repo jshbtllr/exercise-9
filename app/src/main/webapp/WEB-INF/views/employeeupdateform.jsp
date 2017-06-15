@@ -86,12 +86,12 @@
 				<tr>
 					<td align="left" width=20%> <spring:message code="employment.status"/> </td>
 					<td align="center" width=20%>
-						<input type="radio" name="employed" value="true" onclick="document.getElementById('hiredate').disable = false;" required
+						<input type="radio" name="employed" value="true" onclick="document.getElementById('hiredate').disabled = false;" required
 						<core:if test="${employee.employed}">
 								checked
 						</core:if>
 						> <spring:message code="yes"/> </input>
-						<input type="radio" name="employed" value="false" onclick="document.getElementById('hiredate').disable = true;" required
+						<input type="radio" name="employed" value="false" onclick="document.getElementById('hiredate').disabled = true;" required
 						<core:if test="${not employee.employed}">
 								checked
 						</core:if>

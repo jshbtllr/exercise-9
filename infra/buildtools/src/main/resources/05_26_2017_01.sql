@@ -48,7 +48,7 @@ INSERT INTO employee (last_name, first_name, middle_name, suffix, title, street,
 	VALUES ('Cleese', 'John', 'Marwood', 'Sr', 'Sir', '120', 'BF', 'Makati', 'Philippines', '1200A', '1999-06-06', '1.99', '2000-12-31', '1');
 
 INSERT INTO employee (last_name, first_name, middle_name, suffix, title, street, barangay, city, country, zipcode, birthday, gwa, hire_date, employed)
-	VALUES ('Bataller', 'Joshua', 'Rex', ' ', ' ', '101', 'Isla', 'Quezon City', 'Philippines', '1400', '1990-06-06', '1.877', '9999-12-31', '0');
+	VALUES ('Bataller', 'Joshua', 'Rex', ' ', ' ', '101', 'Isla', 'Quezon City', 'Philippines', '1400', '1990-06-06', '1.877', '2000-12-31', '1');
 
 INSERT INTO employee (last_name, first_name, middle_name, suffix, title, street, barangay, city, country, zipcode, birthday, gwa, hire_date, employed)
 	VALUES ('Bastille', 'Bella', 'Donna', ' ', 'Ms.', '1-A', 'Palanan', 'Pasig City', 'Philippines', '1122', '1991-01-01', '1.2466', '2012-11-28', '1');

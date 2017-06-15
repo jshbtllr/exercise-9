@@ -101,13 +101,18 @@ public class EmployeeUpdateController extends SimpleFormController{
 	    Date hireDate = null;
 		String infoType = request.getParameter("infoType");
 	    String infoDetail = request.getParameter("infoDetail");	   
-	    List <String> addedRole = Arrays.asList(request.getParameterValues("roles"));
+	    String [] listRoles  = request.getParameterValues("roles");
 		Boolean gradeFlag = false;
 		Boolean hireFlag = false;
 		Boolean successFlag = true;
 		Boolean birthFlag = false;
 		Boolean contactFlag = false;		
 		StringBuilder message = new StringBuilder();    
+		List <String> addedRole = null;  
+
+		if(listRoles != null) {
+			addedRole = Arrays.asList(listRoles);
+		}
 
 	    try {
 	    	gradeWeightAverage = Float.parseFloat(request.getParameter("gwa"));
@@ -155,11 +160,13 @@ public class EmployeeUpdateController extends SimpleFormController{
 	    if(successFlag == true) {
 	    	name = new Name(firstName, lastName, middleName, suffix, title);
 	    	address = new Address(streetNumber, barangay, city, country, zipcode);
-	    	for(String add : addedRole) {
-	    		Long roleId = Long.parseLong(add);
-	    		Roles in = roleService.get(roleId);
-	    		role.add(in);
-	    	}
+		    if(addedRole != null) {
+		    	for(String add : addedRole) {
+		    		Long roleId = Long.parseLong(add);
+		    		Roles in = roleService.get(roleId);
+		    		role.add(in);
+		    	}
+		    }
 	    	employee = new Employee(name, address, birthdate, gradeWeightAverage, hireDate, employed, 
 					contacts, role);
 
