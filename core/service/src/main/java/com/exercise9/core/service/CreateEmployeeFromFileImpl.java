@@ -85,7 +85,7 @@ public class CreateEmployeeFromFileImpl {
 			return message;
 		}
 
-		name = new Name(employeeDetails.get(0), employeeDetails.get(1), employeeDetails.get(2), employeeDetails.get(3), employeeDetails.get(4));
+		name = new Name(employeeDetails.get(1), employeeDetails.get(2), employeeDetails.get(3), employeeDetails.get(4), employeeDetails.get(0));
 		address = new Address(employeeDetails.get(5), employeeDetails.get(6), employeeDetails.get(7), employeeDetails.get(8), employeeDetails.get(9));		
 		employed = Boolean.parseBoolean(employeeDetails.get(12));	
 
